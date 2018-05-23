@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('bulletins','BulletinBoardController@index');
+Route::get('bulletins/create','BulletinBoardController@create');
+Route::get('bulletins/{id}/{slug}', 'BulletinBoardController@show')->name('bulletin');
+Route::post('bulletins', 'BulletinBoardController@store');
+
+
+Route::post('/threads/{bulletin_id}/post','PostController@store');
+
