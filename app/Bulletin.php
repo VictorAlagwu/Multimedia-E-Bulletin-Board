@@ -13,4 +13,10 @@ class Bulletin extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+    // public function addPost($post){
+    //     return $this->posts()->create($post);
+    // }
 }

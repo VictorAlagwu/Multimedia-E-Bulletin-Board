@@ -11,13 +11,12 @@
                     @foreach ($bulletins as $bulletin)
                         <article>
                             <div class="level">
-                            <h4 class="flex"><a href="{{route('bulletin', ['id' => $bulletin->id, 'slug' => $bulletin->slug])}}">{{$bulletin->title}}</a></h4>
-                               
+                                <h4 class="flex"><a href="{{route('bulletin', ['id' => $bulletin->id, 'slug' => $bulletin->slug])}}">{{$bulletin->title}}</a>
+                                    <span style="float:right;"> created {{$bulletin->created_at->diffForHumans()}}</span>
+                                </h4>
                             </div>
-
-                            <div class="body">{!!$bulletin->subject!!}</div>
                         </article>
-                        
+                    <hr>
                     @endforeach
                 </div>
               

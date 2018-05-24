@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -32,9 +33,20 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($bulletin_id, Request $request)
     {
         //
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+
+        $dom = new \domdocument();
+        $dom->loadHtml($request->message, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $post['message'] = $dom->savehtml();
+        $post['user_id'] = auth()->id();
+        $post['bulletin_id'] = $bulletin_id;
+        Post::create($post);
+        return back();
     }
 
     /**

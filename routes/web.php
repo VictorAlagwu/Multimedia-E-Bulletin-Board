@@ -25,5 +25,5 @@ Route::get('bulletins/{id}/{slug}', 'BulletinBoardController@show')->name('bulle
 Route::post('bulletins', 'BulletinBoardController@store');
 
 
-Route::post('/threads/{bulletin_id}/post','PostController@store');
+Route::post('bulletins/{bulletin_id}/post','PostController@store')->name('post');
 

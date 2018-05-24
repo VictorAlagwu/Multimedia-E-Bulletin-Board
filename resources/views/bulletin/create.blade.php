@@ -10,17 +10,21 @@
                 <div class="panel-body">
                 @if (auth()->check())
             
-                    <form method="POST" action="/bulletins">
+                    <form method="POST" action="/bulletins" enctype="multipart/form-data">
                     {{ csrf_field()}}
                     <div class="form-group">
                         <label class="form-label">Title</label>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Enter Bulletin Board Title..."  />
                     </div>
-                        <div class="form-group">
-                            <label class="form-label">Bulletin Board Subject</label>
-                            <textarea class="form-control summernote" name="subject" id="subject" rows="20" placeholder="Enter Bulletin Board Subject..."></textarea>
+                    <div class="form-group">
+                            <label class="form-label">Upload File</label>
+                            <input type="file" name="file" id="file" class="form-control" />
                         </div>
-                        <button class="btn btn-default" type="submit" name="submit">Create New Bulletin Board</button>
+                    <div class="form-group">
+                        <label class="form-label">Bulletin Board Subject</label>
+                        <textarea class="form-control summernote" name="subject" id="subject" rows="20" placeholder="Enter Bulletin Board Subject..."></textarea>
+                    </div>
+                        <button class="btn btn-default text-center" type="submit" name="submit">Create New Bulletin Board</button>
                         @if(count($errors))
                             <ul class="alert alert-danger">
                                 @foreach($errors->all() as $error)
