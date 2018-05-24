@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -79,5 +81,29 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+
+    <script src="{{ asset('summernote/summernote.js') }}"></script>    
+ 
+<script>
+    $(document).ready(function() {
+        
+            $(".summernote").summernote({
+            height: 300,
+            toolbar: [
+                [ 'style', [ 'style' ] ],
+                [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+                [ 'fontname', [ 'fontname' ] ],
+                [ 'fontsize', [ 'fontsize' ] ],
+                [ 'color', [ 'color' ] ],
+                [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+                [ 'table', [ 'table' ] ],
+                [ 'insert', [ 'link'] ],
+                [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+            ]
+             });
+    });
+
+</script>
 </body>
 </html>

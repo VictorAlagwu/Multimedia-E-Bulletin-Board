@@ -45,12 +45,13 @@ class BulletinBoardController extends Controller
             'subject' => 'required'
         ]);
 
-        $thread = Bulletin::create([
-            'subject'=>request('subject'),
-            'title' =>request('title'),
-            'slug' => str_slug(request('title'), '-'),
-            'user_id'=>auth()->id()
-        ]);
+        $dom = new \domdocument();
+        $dom->loadHtml($request->subject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $bulletin['subject'] = $dom->savehtml();
+        $bulletin['title'] = $request->title;
+        $bulletin['slug'] = str_slug($request->title, '-');
+        $bulletin['user_id'] = auth()->id();
+        Bulletin::create($bulletin);
         return redirect('/bulletins');
     }
 

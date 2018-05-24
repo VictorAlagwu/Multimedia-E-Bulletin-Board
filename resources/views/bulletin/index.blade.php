@@ -15,7 +15,7 @@
                                
                             </div>
 
-                            <div class="body">{{$bulletin->subject}}</div>
+                            <div class="body">{!!$bulletin->subject!!}</div>
                         </article>
                         
                     @endforeach

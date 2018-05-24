@@ -18,9 +18,9 @@
                     </div>
                         <div class="form-group">
                             <label class="form-label">Bulletin Board Subject</label>
-                            <textarea class="form-control" name="subject" id="subject" rows="8" placeholder="Enter Bulletin Board Subject..."></textarea>
+                            <textarea class="form-control summernote" name="subject" id="subject" rows="20" placeholder="Enter Bulletin Board Subject..."></textarea>
                         </div>
-                        <button class="btn btn-default" type="submit" name="submit">Create Thread</button>
+                        <button class="btn btn-default" type="submit" name="submit">Create New Bulletin Board</button>
                         @if(count($errors))
                             <ul class="alert alert-danger">
                                 @foreach($errors->all() as $error)
