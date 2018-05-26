@@ -30,5 +30,9 @@ class User extends Authenticatable
     public function bulletins(){
         return $this->hasMany(Bulletin::class);
     }
+
+    public function userbulletins(){
+        return $this->hasMany(Userbulletin::class);
+    }
     
 }

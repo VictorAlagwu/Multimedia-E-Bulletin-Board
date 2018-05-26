@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Bulletin;
+use App\Userbulletin;
 
 class BulletinBoardController extends Controller
 {
@@ -84,8 +85,13 @@ class BulletinBoardController extends Controller
     public function show($id, $slug)
     {
         //
-        // $bulletin = Bulletin::whereColumn('id',$id,'slug',$slug)->get();
+        // $user = auth()->id();
+        // $subscribe = 0;
+        // $userbulletin = Userbulletin::where(['user_id'=>$user, 'subscribe'=> $subscribe]);
+        // dd($userbulletin);  
+        
         $bulletin = Bulletin::where(['id' => $id,'slug' => $slug])->first();
+        
         return view('bulletin.show', ['bulletin' => $bulletin, 'posts' => $bulletin->posts()->paginate(1)]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Userbulletin;
 
 class UserBulletinController extends Controller
 {
@@ -35,6 +36,17 @@ class UserBulletinController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $this->validate($request, [
+            'user_id' => 'required',
+            'bulletin_id' => 'required'
+        ]);
+        $userbulletin['user_id'] = $request->user_id;
+        $userbulletin['bulletin_id'] = $request->bulletin_id;
+        $userbulletin['subscribe'] = ($request->subscribe  == 'true' ? 1 : 0);
+        
+        Userbulletin::create($userbulletin);
+        return back();
     }
 
     /**
