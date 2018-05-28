@@ -8,6 +8,10 @@ use App\Bulletin;
 
 class AdminController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -92,6 +96,7 @@ class AdminController extends Controller
 
     public function bulletinShow($id)
     {
+        
         $bulletin = Bulletin::where('id', $id)->first();
          $users = User::all();
         return view('admin.bulletin', [

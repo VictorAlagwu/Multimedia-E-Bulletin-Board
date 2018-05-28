@@ -27,7 +27,8 @@ Route::post('bulletins', 'BulletinBoardController@store');
 
 Route::post('bulletins/{bulletin_id}/post','PostController@store')->name('post');
 
-Route::get('admin', 'AdminController@index');
-Route::get('admin/bulletin/{id}', 'AdminController@bulletinShow')->name('admin/bulletin');
 
 Route::post('user/bulletin', 'UserBulletinController@store')->name('user/bulletin');
+
+    Route::get('admin', 'AdminController@index')->middleware('admin');
+    Route::get('admin/bulletin/{id}', 'AdminController@bulletinShow')->name('admin/bulletin')->middleware('admin');

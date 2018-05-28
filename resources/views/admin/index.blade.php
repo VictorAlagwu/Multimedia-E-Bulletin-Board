@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
     <!-- Page -->
+    @if(\Session::has('error'))
+<div class=”alert alert-danger”>
+{{\Session::get('error')}}
+</div>
+@endif
     <div class="page">
       <div class="page-content container-fluid">
         <div class="row" data-plugin="matchHeight" data-by-row="true">
