@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ config('app.name', 'Ebulletin') }}  | Dashboard</title>
+    <title>Homepage | {{ config('app.name', 'Ebulletin') }}</title>
     
     <link rel="apple-touch-icon" href="{{asset('assets/images/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
@@ -85,15 +85,16 @@
           
           <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
         @guest
-                {{-- <li class="nav-item"><a href="{{ route('login') }}">Login</a></li>
-                <li class="nav-item"><a href="{{ route('register') }}">Register</a></li> --}}
+              <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
         @else
             <li class="nav-item dropdown">
               <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
                 data-animation="scale-up" role="button">
+                {{ Auth::user()->name }}
                 <span class="avatar avatar-online">
-                  {{-- <img src="{{asset('global/portraits/5.jpg')}}" alt="..."> --}}
-                  {{ Auth::user()->name }}
+                  <img src="{{asset('global/portraits/5.jpg')}}" alt="...">
+                  
                   <i></i>
                 </span>
               </a>
@@ -124,7 +125,7 @@
        @yield('content')
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="site-footer-legal">© 2018 Victor Alagwu 👨‍💻</div>
+        <div class="site-footer-legal">© 2018 Victor Alagwu 💻</div>
         <div class="site-footer-right">
           Crafted with <i class="red-600 icon md-favorite"></i> by Victor
         </div>
@@ -192,7 +193,6 @@
                 [ 'fontsize', [ 'fontsize' ] ],
                 [ 'color', [ 'color' ] ],
                 [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-                [ 'table', [ 'table' ] ],
                 [ 'insert', [ 'link'] ],
                 [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
             ]

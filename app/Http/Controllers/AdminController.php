@@ -93,7 +93,7 @@ class AdminController extends Controller
     public function bulletinShow($id)
     {
         $bulletin = Bulletin::where('id', $id)->first();
-        $users = User::where();
+         $users = User::all();
         return view('admin.bulletin', [
             'bulletin' => $bulletin,
             'users' => $users

@@ -1,4 +1,5 @@
-<select name="country" class="form-control">
+
+   <select name="country" class="form-control">
         <option value="Afganistan">Afghanistan</option>
         <option value="Albania">Albania</option>
         <option value="Algeria">Algeria</option>
@@ -246,4 +247,6 @@
         <option value="Zaire">Zaire</option>
         <option value="Zambia">Zambia</option>
         <option value="Zimbabwe">Zimbabwe</option>
-</select>
+     </select>
+     <label for="country" class="floating-label">Country</label>
+     

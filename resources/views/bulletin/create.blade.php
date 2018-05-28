@@ -12,16 +12,21 @@
             
                     <form method="POST" action="/bulletins" enctype="multipart/form-data">
                     {{ csrf_field()}}
+                    
                     <div class="form-group">
-                        <label class="form-label">Title</label>
+                        <h3>Bulletin Board Title</h3>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Enter Bulletin Board Title..."  />
                     </div>
+                    <h3>Add File</h3>
+                    <label class="btn btn-success btn-file" for="my-file-selector">
+                            <input id="my-file-selector" name="file" type="file" style="display:none" 
+                            onchange="$('#upload-file-info').html(this.files[0].name)">
+                            Upload <i class="icon md-upload" aria-hidden="true"></i>
+                    </label>
+                     <span class='label label-info' id="upload-file-info"></span>
+                       
                     <div class="form-group">
-                            <label class="form-label">Upload File</label>
-                            <input type="file" name="file" id="file" class="form-control" />
-                        </div>
-                    <div class="form-group">
-                        <label class="form-label">Bulletin Board Subject</label>
+                        <h3>Bulletin Board Subject</h3>
                         <textarea class="form-control summernote" name="subject" id="subject" rows="20" placeholder="Enter Bulletin Board Subject..."></textarea>
                     </div>
                         <button class="btn btn-default text-center" type="submit" name="submit">Create New Bulletin Board</button>
@@ -34,7 +39,7 @@
                         @endif
                     </form>
                 @else
-                             <p>Please <a href="/login">Sign-In</a> to create a new bulletin board</p>
+                    <p>Please <a href="/login">Sign-In</a> to create a new bulletin board</p>
 
                 @endif
                 </div>

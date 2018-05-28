@@ -23,9 +23,11 @@ class BulletinBoardController extends Controller
     public function index()
     {
         //
-        $bulletins = Bulletin::latest()->get();
+        $bulletins = Bulletin::latest();
 
-        return view('bulletin.index', compact('bulletins'));
+        return view('bulletin.index', [
+            'bulletins'=>$bulletins->paginate(4)
+        ]);
     }
 
     /**
@@ -84,15 +86,20 @@ class BulletinBoardController extends Controller
      */
     public function show($id, $slug)
     {
-        //
-        // $user = auth()->id();
-        // $subscribe = 0;
-        // $userbulletin = Userbulletin::where(['user_id'=>$user, 'subscribe'=> $subscribe]);
-        // dd($userbulletin);  
-        
         $bulletin = Bulletin::where(['id' => $id,'slug' => $slug])->first();
+
+        $user = Userbulletin::where('user_id', auth()->id())
+                            ->where('bulletin_id', $id)
+                            ->where('subscribe', 1)
+                            ->first();
+        if($user){
+            return view('bulletin.show', ['bulletin' => $bulletin, 'posts' => $bulletin->posts()->paginate(5)]);      
+        }else{
+            return redirect('/bulletins');
+        }
         
-        return view('bulletin.show', ['bulletin' => $bulletin, 'posts' => $bulletin->posts()->paginate(1)]);
+        
+        
     }
 
     /**

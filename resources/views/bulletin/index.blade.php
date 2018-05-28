@@ -10,15 +10,7 @@
   
           <!-- Forum Content Header -->
           <div class="page-header">
-            <h1 class="page-title">Getting Started</h1>
-            <form class="mt-20" action="#" role="search">
-              <div class="input-search input-search-dark">
-                <input type="text" class="form-control w-full" placeholder="Search..." name="">
-                <button type="submit" class="input-search-btn">
-                  <i class="icon md-search" aria-hidden="true"></i>
-                </button>
-              </div>
-            </form>
+            <h1 class="page-title">Welcome to Multimedia EBulletin Board</h1>
           </div>
   
           <!-- Forum Nav -->
@@ -26,7 +18,7 @@
             <ul class="nav nav-tabs nav-tabs-line" role="tablist">
               <li class="nav-item" role="presentation">
                 <a class="active nav-link" data-toggle="tab" href="#forum-newest" aria-controls="forum-newest"
-                  aria-expanded="true" role="tab">Newest</a>
+                  aria-expanded="true" role="tab">Newest Bulletin Board</a>
               </li>
           
             </ul>
@@ -68,15 +60,7 @@
                   
                 </tbody>
               </table>
-              <ul class="pagination pagination-gap">
-                <li class="disabled page-item"><a class="page-link" href="javascript:void(0)">Previous</a></li>
-                <li class="active page-item"><a class="page-link" href="javascript:void(0)">1 <span class="sr-only">(current)</span></a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">Next</a></li>
-              </ul>
+              ({{$bulletins->links('vendor.pagination.bootstrap-4')}})
             </div>
            
           </div>
@@ -98,48 +82,47 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-              <h4 class="modal-title">Create New Topic</h4>
+              <h4 class="modal-title">Create New Bulletin Board</h4>
             </div>
+            @if (auth()->check())
+            <form method="POST" action="/bulletins" enctype="multipart/form-data">
+              {{ csrf_field()}}
             <div class="modal-body container-fluid">
-              <form>
+              
                 <div class="form-group">
-                  <label class="form-control-label mb-15" for="topicTitle">Topic Title:</label>
-                  <input type="text" class="form-control" id="topicTitle" name="title" placeholder="How To..."
-                  />
+                  <label class="form-control-label mb-15" for="topicTitle">Bulletin Board Title:</label>
+                  <input type="text" class="form-control" id="topicTitle" name="title" placeholder="Enter Bulletin Board Title" />
                 </div>
                 <div class="form-group">
-                  <textarea name="content" data-provide="markdown" data-iconlibrary="fa" rows="10"></textarea>
+                  <label class="form-control-label mb-15" for="topicSubject">Bulletin Board Subject:</label>
+                  <textarea name="subject" class="summernote" data-iconlibrary="fa" rows="10"></textarea>
                 </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <label class="form-control-label mb-15" for="topicCategory">Topic Category:</label>
-                      <select id="topicCategory" data-plugin="selectpicker">
-                        <option>PHP</option>
-                        <option>Javascript</option>
-                        <option>HTML</option>
-                        <option>CSS</option>
-                        <option>Ruby</option>
-                      </select>
-                    </div>
-                    <div class="col-sm-6">
-                      <label class="form-control-label mb-15" for="topic_tags">Topic Tags:</label>
-                      <select id="topic_tags" data-plugin="selectpicker">
-                        <option>PHP</option>
-                        <option>Javascript</option>
-                        <option>HTML</option>
-                        <option>CSS</option>
-                        <option>Ruby</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </form>
+                <label class="btn btn-success btn-file" for="my-file-selector">
+                    <input id="my-file-selector" name="file" type="file" style="display:none" 
+                    onchange="$('#upload-file-info').html(this.files[0].name)">
+                    Upload <i class="icon md-upload" aria-hidden="true"></i>
+                </label>
+                <span class='label label-info' id="upload-file-info"></span>
+               
+             
             </div>
             <div class="modal-footer text-left">
-              <button class="btn btn-primary" data-dismiss="modal" type="submit">Create</button>
+              <button class="btn btn-primary" data-dismiss="modal" name="submit" type="submit">Create</button>
               <a class="btn btn-sm btn-white btn-flat" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
+                  @if(count($errors))
+                      <ul class="alert alert-danger">
+                          @foreach($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                   @endif
             </div>
+          </form>
+            @else
+            <div class="modal-body container-fluid">
+              <p>Please <a href="{{route('login')}}">Sign-In</a> to create a new bulletin board</p>
+            </div>
+            @endif
           </div>
         </div>
       </div>

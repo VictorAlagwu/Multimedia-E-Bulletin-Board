@@ -45,8 +45,17 @@ class UserBulletinController extends Controller
         $userbulletin['bulletin_id'] = $request->bulletin_id;
         $userbulletin['subscribe'] = ($request->subscribe  == 'true' ? 1 : 0);
         
-        Userbulletin::create($userbulletin);
-        return back();
+        $user = Userbulletin::where('user_id', $userbulletin['user_id'])
+                    ->where('bulletin_id', $userbulletin['bulletin_id'])
+                    ->first();
+        if($user){
+            return redirect('/admin');
+        }else{
+            Userbulletin::create($userbulletin);
+            return back();
+        }
+         
+        
     }
 
     /**
