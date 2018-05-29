@@ -1,11 +1,19 @@
+
 @extends('layouts.app')
+@section('title', 'Create Bulletin')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Create a New Bulletin Board</div>
+            <div class="panel panel-success panel-line">
+                <div class="panel-heading">
+                    <h3>
+                        <div class="panel-title">
+                            Create a New Bulletin Board
+                        </div>
+                    </h3>
+                </div>
 
                 <div class="panel-body">
                 @if (auth()->check())

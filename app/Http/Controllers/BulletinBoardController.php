@@ -58,23 +58,40 @@ class BulletinBoardController extends Controller
             'subject' => 'required',
             'file' => 'file|mimes:' . $all_ext . '|max:' . $max_size
         ]);
-        $bulletin['file'] = $request->file;
-        $ext = $bulletin['file']->getClientOriginalExtension();
-        $bulletin['file_ext'] = $this->getType($ext);
-        $bulletin['extension'] = $ext;
+       
+        if( $request->hasFile('file') ){
+            $bulletin['file'] = $request->file;
+            $ext = $bulletin['file']->getClientOriginalExtension();
+            $bulletin['file_ext'] = $this->getType($ext);
+            $bulletin['extension'] = $ext;
+            $dom = new \domdocument();
+            $dom->loadHtml($request->subject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $bulletin['subject'] = $dom->savehtml();
 
-        $dom = new \domdocument();
-        $dom->loadHtml($request->subject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $bulletin['subject'] = $dom->savehtml();
+
+            $bulletin['title'] = $request->title;
+            $bulletin['slug'] = str_slug($request->title, '-');
+            $bulletin['user_id'] = auth()->id();
+            
+            if (Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $bulletin['file_ext'] . '/', $bulletin['file'], $request['title'] . '.' . $ext)) {
+                Bulletin::create($bulletin);
+            }
+        }else{
+           
+            $dom = new \domdocument();
+            $dom->loadHtml($request->subject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $bulletin['subject'] = $dom->savehtml();
 
 
-        $bulletin['title'] = $request->title;
-        $bulletin['slug'] = str_slug($request->title, '-');
-        $bulletin['user_id'] = auth()->id();
-        
-        if (Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $bulletin['file_ext'] . '/', $bulletin['file'], $request['title'] . '.' . $ext)) {
-             Bulletin::create($bulletin);
+            $bulletin['title'] = $request->title;
+            $bulletin['slug'] = str_slug($request->title, '-');
+            $bulletin['user_id'] = auth()->id();
+            Bulletin::create($bulletin);
+            
         }
+        
+
+        
         return redirect('/bulletins');
     }
 
@@ -92,7 +109,7 @@ class BulletinBoardController extends Controller
                             ->where('bulletin_id', $id)
                             ->where('subscribe', 1)
                             ->first();
-        if($user){
+        if($user || Auth::user()->status == 'admin'){
             return view('bulletin.show', ['bulletin' => $bulletin, 'posts' => $bulletin->posts()->paginate(5)]);      
         }else{
             return redirect('/bulletins');

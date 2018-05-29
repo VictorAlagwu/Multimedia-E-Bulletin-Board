@@ -9,6 +9,15 @@ class Bulletin extends Model
     //
     protected $guarded = [];
 
+
+    // protected static function boot(){
+    //     parent::boot();
+    //     static::addGlobalScope('replyCount', function($builder) {
+    //         $builder->withCount('posts');
+    //     });
+    // }
+
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -16,7 +25,7 @@ class Bulletin extends Model
     public function posts(){
         return $this->hasMany(Post::class);
     }
-    // public function addPost($post){
-    //     return $this->posts()->create($post);
-    // }
+    public function getPostCount(){
+        return $this->posts()->count();
+    }
 }

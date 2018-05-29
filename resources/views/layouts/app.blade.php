@@ -10,8 +10,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>Homepage | {{ config('app.name', 'Ebulletin') }}</title>
-    
+    <title>@yield('title')| {{ config('app.name', 'Ebulletin') }}</title>
+   
     <link rel="apple-touch-icon" href="{{asset('assets/images/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
     
@@ -63,7 +63,7 @@
     <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
     
       <div class="navbar-header">
-            <a class="navbar-brand navbar-brand-center" href="{{url('/home')}}">
+            <a class="navbar-brand navbar-brand-center" href="{{url('/bulletins')}}">
                 <img class="navbar-brand-logo navbar-brand-logo-normal" src="{{asset('assets/images/logo.png')}}"
                     title="Remark">
                 <img class="navbar-brand-logo navbar-brand-logo-special" src="{{asset('assets/images/logo-colored.png')}}"
@@ -99,9 +99,12 @@
                 </span>
               </a>
               <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
+                @if( Auth::user()->status == 'admin')
+                <a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a>
+                <a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a>
+               @endif
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a>
+                {{-- <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a> --}}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" role="menuitem" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Bulletin;
+use App\Userbulletin;
 
 class AdminController extends Controller
 {
@@ -98,10 +99,13 @@ class AdminController extends Controller
     {
         
         $bulletin = Bulletin::where('id', $id)->first();
-         $users = User::all();
+        $users = User::all();
+        $userbulletins = Userbulletin::where('bulletin_id', $id)->get();
+
         return view('admin.bulletin', [
             'bulletin' => $bulletin,
-            'users' => $users
-            ]);
+            'users' => $users,
+            'userbulletins'=>$userbulletins
+        ]);
     }
 }

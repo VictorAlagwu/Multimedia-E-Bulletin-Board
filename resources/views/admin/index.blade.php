@@ -13,7 +13,7 @@
             <!-- Panel Projects -->
             <div class="panel" id="projects">
               <div class="panel-heading">
-                <h3 class="panel-title">Projects</h3>
+                <h3 class="panel-title">Registered Users</h3>
               </div>
               <div class="table-responsive">
                 <table class="table table-striped">
@@ -21,7 +21,7 @@
                     <tr>
                       <td>ID</td>
                       <td>User</td>
-                      <td>Date</td>
+                      <td>Registeration Date</td>
                       <td>Actions</td>
                     </tr>
                   </thead>
@@ -30,7 +30,7 @@
                     <tr>
                     <td>{{$detail->id}}</td>
                     <td>{{$detail->name}}</td>
-                    <td>Jan 1, 2017</td>
+                    <td>{{$detail->created_at->diffForHumans()}}</td>
                     <td>
                         <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
                             data-toggle="tooltip" data-original-title="Edit">

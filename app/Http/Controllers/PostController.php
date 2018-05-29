@@ -18,6 +18,7 @@ class PostController extends Controller
     private $audio_ext = ['mp3', 'ogg', 'mpga'];
     private $video_ext = ['mp4', 'mpeg'];
     private $document_ext = ['doc', 'docx', 'pdf', 'odt'];
+    
     public function index()
     {
         //
@@ -49,26 +50,32 @@ class PostController extends Controller
             'message' => 'required',
             'file' => 'file|mimes:' . $all_ext . '|max:' . $max_size
         ]);
+        if( $request->hasFile('file') ){
+            $post['file'] = $request->file;
+            $ext = $post['file']->getClientOriginalExtension();
+            $post['file_ext'] = $this->getType($ext);
+            $post['extension'] = $ext;
+    
+            $dom = new \domdocument();
+            $dom->loadHtml($request->message, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $post['message'] = $dom->savehtml();
+            $post['user_id'] = auth()->id();
+            $post['bulletin_id'] = $bulletin_id;
+            
+            
+            $storage = Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $post['file_ext'] . '/', $post['file'], uniqid('title_') . '.' . $ext);
+            if ($storage) {Post::create($post); }
+        }else{
+            $dom = new \domdocument();
+            $dom->loadHtml($request->message, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $post['message'] = $dom->savehtml();
+            $post['user_id'] = auth()->id();
+            $post['bulletin_id'] = $bulletin_id;
 
-        $post['file'] = $request->file;
-        $ext = $post['file']->getClientOriginalExtension();
-        $post['file_ext'] = $this->getType($ext);
-        $post['extension'] = $ext;
-
-        $dom = new \domdocument();
-        $dom->loadHtml($request->message, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $post['message'] = $dom->savehtml();
-        $post['user_id'] = auth()->id();
-        $post['bulletin_id'] = $bulletin_id;
-        
-        
-        $storage = Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $post['file_ext'] . '/', $post['file'], uniqid('title_') . '.' . $ext);
-        if ($storage) {
             Post::create($post);
-            return back();
-        }else {
-            return redirect('/bulletins');
         }
+        return back();
+       
         
         
     }

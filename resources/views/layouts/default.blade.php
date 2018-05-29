@@ -55,7 +55,7 @@
                     <ul class="nav navbar-nav">
 
                     <li><a href="/bulletins">All Bulletins</a></li>
-                    <li><a href="/bulletins/create">New Bulletins</a></li>
+                    <li><a href="/bulletins/create">New Bulletin</a></li>
                     </ul>
 
  
@@ -72,11 +72,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    @if( Auth::user()->status == 'admin')
+                                    <li><a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a></li>
+                                    @endif
+                                    <li><a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a></li>
                                     <li>
-                                        <a href="">
-                                           View Profile
-                                        </a>
-                                    </li> <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -1,5 +1,6 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
+@section('title', 'Homepage')
 @section('content')
 <div class="page bg-white">
         <!-- Forum Sidebar -->
@@ -50,8 +51,8 @@
                       </div>
                     </td>
                     <td class="cell-80 forum-posts">
-                      <span class="num">1</span>
-                      <span class="unit">Post</span>
+                      <span class="num">{{$bulletin->posts->count()}}</span>
+                      <span class="unit">{{ str_plural('Post',$bulletin->posts->count())}}</span>
                     </td>
                     <td class="suf-cell"></td>
                   </tr>
@@ -67,7 +68,7 @@
         </div>
       </div>
   
-      <!-- Site Action -->
+      {{-- <!-- Site Action -->
       <div class="site-action" data-target="#addTopicForm" data-toggle="modal" data-plugin="actionBtn">
         <button type="button" class="site-action-toggle btn-raised btn btn-success btn-floating">
           <i class="icon md-edit" aria-hidden="true"></i>
@@ -126,5 +127,5 @@
           </div>
         </div>
       </div>
-      <!-- End Add Topic Form -->
+      <!-- End Add Topic Form --> --}}
 @endsection
