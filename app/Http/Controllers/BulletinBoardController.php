@@ -110,7 +110,7 @@ class BulletinBoardController extends Controller
                                 ->where('bulletin_id', $id)
                                 ->where('subscribe', 1)
                                 ->first();
-            if($user || Auth::user()->status == 'admin'){
+            if($user || Auth::user()->status == 'admin' || Auth::user()->status == 'superadmin'){
                 return view('bulletin.show', ['bulletin' => $bulletin, 'posts' => $bulletin->posts()->paginate(5)]);      
             }else{
                 return redirect('/bulletins');

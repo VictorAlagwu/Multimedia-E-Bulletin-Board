@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Bulletin;
+use App\Userbulletin;
 use Auth;
 class ProfileController extends Controller
 {
@@ -19,7 +21,9 @@ class ProfileController extends Controller
         //
         $id = Auth::user()->id;
         $user = User::where('id', $id)->first();
-        return view('profile.index', compact('user'));
+        $bulletins = Bulletin::where('user_id', $id)->get();
+        $userbulletins = Userbulletin::where(['user_id'=>$id, 'subscribe' => 1])->get();
+        return view('profile.index', compact('user', 'bulletins', 'userbulletins'));
     }
 
     /**

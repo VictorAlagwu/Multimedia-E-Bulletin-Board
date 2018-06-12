@@ -35,11 +35,11 @@
                     <td class="pre-cell"></td>
                     <td class="cell-60 responsive-hide">
                       <a class="avatar" href="javascript:void(0)">
-                          @if(is_null(Auth::user()->photo))
-                          <img class="img-fluid" src="{{asset('images/profile/avatar.png')}}" alt="...">
-                          @else
+                        @if(is_null($bulletin->user->photo))
+                          <img class="img-fluid" src="{{asset('images/profile/nopic.png')}}" alt="...">
+                        @else
                           <img class="img-fluid"  src="{{asset('images/profile/'.$bulletin->user->photo)}}" alt="...">
-                          @endif
+                        @endif
                       </a>
                     </td>
                     <td>

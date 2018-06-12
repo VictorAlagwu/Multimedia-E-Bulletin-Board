@@ -60,7 +60,7 @@
                       <thead>
                         <tr>
                           <td>ID</td>
-                          <td>User</td>
+                          <td>Bullentin Board Title</td>
                           <td>Date</td>
                           <td>Actions</td>
                         </tr>
