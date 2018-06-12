@@ -53,6 +53,7 @@ class PostController extends Controller
         if( $request->hasFile('file') ){
             $post['file'] = $request->file;
             $ext = $post['file']->getClientOriginalExtension();
+            $post['filename'] = $post['file']->getClientOriginalName();
             $post['file_ext'] = $this->getType($ext);
             $post['extension'] = $ext;
     
@@ -63,7 +64,7 @@ class PostController extends Controller
             $post['bulletin_id'] = $bulletin_id;
             
             
-            $storage = Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $post['file_ext'] . '/', $post['file'], uniqid('title_') . '.' . $ext);
+            $storage = Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $post['file_ext'] . '/', $post['file'], $post['filename']);
             if ($storage) {Post::create($post); }
         }else{
             $dom = new \domdocument();

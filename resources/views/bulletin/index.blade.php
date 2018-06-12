@@ -1,6 +1,6 @@
 
 @extends('layouts.app')
-@section('title', 'Homepage')
+@section('title', 'Bulletins')
 @section('content')
 <div class="page bg-white">
         <!-- Forum Sidebar -->

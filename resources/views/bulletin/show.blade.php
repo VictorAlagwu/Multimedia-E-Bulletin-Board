@@ -1,9 +1,10 @@
+@if(auth()->check())
 @extends('layouts.default')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-    @if(auth()->check())
+   
         <div class="col-md-8">
             <!-- Heading With Desc -->
             <div class="panel panel-info panel-line">
@@ -23,8 +24,11 @@
                     </figure>
                 @elseif($bulletin->file_ext == 'audio')
                 <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
-                        Your browser does not support the audio tag.
-                    </audio>
+                <audio controls>
+                    <source src="{{ asset('storage/' . Auth::user()->name . '_' . Auth::id()) .'/'.$bulletin->file_ext.'/'.$bulletin->title.'.'.$bulletin->extension }}" type="audio/{{$bulletin->extension}}">
+                     Your browser does not support the audio tag.
+                </audio>
+                    
                 @elseif($bulletin->file_ext == 'video')
                 <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
                 <video controls>
@@ -79,10 +83,11 @@
                 </div>
              </div>
         </div>
-    @else
-            <p class="text-center">Sorry, You don't have the required premissions to view this bulletin board</p> 
-    @endif
+   
     </div>
 </div>
 
 @endsection
+@else
+<p class="text-center">Sorry, You don't have the required premissions to view this bulletin board</p> 
+@endif
