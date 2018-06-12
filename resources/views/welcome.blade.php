@@ -35,7 +35,11 @@
                     <td class="pre-cell"></td>
                     <td class="cell-60 responsive-hide">
                       <a class="avatar" href="javascript:void(0)">
-                        <img class="img-fluid" src="../../../../global/portraits/1.jpg" alt="...">
+                          @if(is_null(Auth::user()->photo))
+                          <img class="img-fluid" src="{{asset('images/profile/avatar.png')}}" alt="...">
+                          @else
+                          <img class="img-fluid"  src="{{asset('images/profile/'.$bulletin->user->photo)}}" alt="...">
+                          @endif
                       </a>
                     </td>
                     <td>
@@ -68,64 +72,4 @@
         </div>
       </div>
   
-      {{-- <!-- Site Action -->
-      <div class="site-action" data-target="#addTopicForm" data-toggle="modal" data-plugin="actionBtn">
-        <button type="button" class="site-action-toggle btn-raised btn btn-success btn-floating">
-          <i class="icon md-edit" aria-hidden="true"></i>
-        </button>
-      </div>
-      <!-- End Site Action -->
-  
-      <!-- Add Topic Form -->
-      <div class="modal fade" id="addTopicForm" aria-hidden="true" aria-labelledby="addTopicForm"
-        role="dialog" tabindex="-1">
-        <div class="modal-dialog modal-simple">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-              <h4 class="modal-title">Create New Bulletin Board</h4>
-            </div>
-            @if (auth()->check())
-            <form method="POST" action="/bulletins" enctype="multipart/form-data">
-              {{ csrf_field()}}
-            <div class="modal-body container-fluid">
-              
-                <div class="form-group">
-                  <label class="form-control-label mb-15" for="topicTitle">Bulletin Board Title:</label>
-                  <input type="text" class="form-control" id="topicTitle" name="title" placeholder="Enter Bulletin Board Title" />
-                </div>
-                <div class="form-group">
-                  <label class="form-control-label mb-15" for="topicSubject">Bulletin Board Subject:</label>
-                  <textarea name="subject" class="summernote" data-iconlibrary="fa" rows="10"></textarea>
-                </div>
-                <label class="btn btn-success btn-file" for="my-file-selector">
-                    <input id="my-file-selector" name="file" type="file" style="display:none" 
-                    onchange="$('#upload-file-info').html(this.files[0].name)">
-                    Upload <i class="icon md-upload" aria-hidden="true"></i>
-                </label>
-                <span class='label label-info' id="upload-file-info"></span>
-               
-             
-            </div>
-            <div class="modal-footer text-left">
-              <button class="btn btn-primary" data-dismiss="modal" name="submit" type="submit">Create</button>
-              <a class="btn btn-sm btn-white btn-flat" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
-                  @if(count($errors))
-                      <ul class="alert alert-danger">
-                          @foreach($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                   @endif
-            </div>
-          </form>
-            @else
-            <div class="modal-body container-fluid">
-              <p>Please <a href="{{route('login')}}">Sign-In</a> to create a new bulletin board</p>
-            </div>
-            @endif
-          </div>
-        </div>
-      </div>
-      <!-- End Add Topic Form --> --}}
 @endsection

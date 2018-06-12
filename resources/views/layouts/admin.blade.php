@@ -109,8 +109,11 @@
                     data-animation="scale-up" role="button">
                     {{ Auth::user()->name }}
                     <span class="avatar avatar-online">
-                      <img src="{{asset('global/portraits/5.jpg')}}" alt="...">
-                      
+                        @if(is_null(Auth::user()->photo))
+                        <img src="{{asset('images/profile/avatar.png')}}" alt="...">
+                        @else
+                        <img src="{{asset('images/profile/'.Auth::user()->photo)}}" alt="...">
+                        @endif
                       <i></i>
                     </span>
                   </a>

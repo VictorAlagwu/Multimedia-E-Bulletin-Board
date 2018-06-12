@@ -23,7 +23,7 @@
               </li>
           
             </ul>
-          </div>
+          </div> 
   
           <!-- Forum Content -->
           <div class="page-content tab-content page-content-table nav-tabs-animate">
@@ -35,7 +35,11 @@
                     <td class="pre-cell"></td>
                     <td class="cell-60 responsive-hide">
                       <a class="avatar" href="javascript:void(0)">
-                        <img class="img-fluid" src="../../../../global/portraits/1.jpg" alt="...">
+                          @if(is_null(Auth::user()->photo))
+                          <img class="img-fluid" src="{{asset('images/profile/avatar.png')}}" alt="...">
+                          @else
+                          <img class="img-fluid"  src="{{asset('images/profile/'.$bulletin->user->photo)}}" alt="...">
+                          @endif
                       </a>
                     </td>
                     <td>

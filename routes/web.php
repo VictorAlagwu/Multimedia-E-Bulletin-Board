@@ -30,3 +30,6 @@ Route::post('user/bulletin', 'UserBulletinController@store')->name('user/bulleti
 
 Route::get('admin', 'AdminController@index')->middleware('admin');
 Route::get('admin/bulletin/{id}', 'AdminController@bulletinShow')->name('admin/bulletin')->middleware('admin');
+
+Route::get('/profile', 'ProfileController@edit')->name('profile');
+Route::post('/profile-update', 'ProfileController@update')->name('profile.update');
