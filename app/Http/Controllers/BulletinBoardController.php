@@ -74,7 +74,8 @@ class BulletinBoardController extends Controller
             $bulletin['user_id'] = auth()->id();
             
             if (Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $bulletin['file_ext'] . '/', $bulletin['file'], $request['title'] . '.' . $ext)) {
-                Bulletin::create($bulletin);
+                $bulletin = Bulletin::create($bulletin);
+                
             }
         }else{
            
@@ -92,7 +93,7 @@ class BulletinBoardController extends Controller
         
 
         
-        return redirect('/bulletins');
+        return redirect("bulletins/$bulletin->id/$bulletin->slug");
     }
 
     /**

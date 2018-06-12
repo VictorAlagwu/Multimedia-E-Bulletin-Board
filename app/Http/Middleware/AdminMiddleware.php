@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->status != 'admin')
+        if ($request->user() && $request->user()->status != 'admin' )
         {
             return redirect('bulletins')->with('error','You have not admin access');
         }
