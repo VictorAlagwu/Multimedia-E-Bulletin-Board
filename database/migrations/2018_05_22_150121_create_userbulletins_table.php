@@ -17,7 +17,7 @@ class CreateUserbulletinsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('bulletin_id');
-            $table->integer('subscribe');
+            $table->boolean('subscribe');
             $table->timestamps();
         });
     }

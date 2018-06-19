@@ -23,7 +23,7 @@ Route::post('bulletins', 'BulletinBoardController@store');
 
 
 Route::get('bulletins/create','BulletinBoardController@create')->middleware('moderate');
-Route::get('admin', 'AdminController@index')->middleware('adminandsuper');
+Route::get('admin', 'AdminController@index')->middleware('moderate');
 Route::get('admin/bulletin/{id}', 'AdminController@bulletinShow')->name('admin/bulletin')->middleware('moderate');
 
 

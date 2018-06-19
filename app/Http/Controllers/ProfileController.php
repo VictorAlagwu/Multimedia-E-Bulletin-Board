@@ -50,10 +50,10 @@ class ProfileController extends Controller
             if($profile->photo != 'nopic.png'){
             
             $path = 'images/profile/'.$profile->photo;
-            if(file_exists($path))
-            {
-                unlink($path);
-            }
+            // if(file_exists($path))
+            // {
+            //     unlink($path);
+            // }
             }
             
             $profile['photo'] = uniqid().'.'.$request->photo->getClientOriginalExtension();

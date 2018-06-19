@@ -18,28 +18,33 @@
                 </div>
                 <div class="panel-footer" style="background-color:#80808052;">
                     @if ($bulletin->file_ext == 'image')
-                    <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
+                    
                     <figure>
                         <img width="200" class="img-responsive" src="{{ asset('storage/' . $bulletin->user->name . '_' . $bulletin->user->id) .'/'.$bulletin->file_ext.'/'.$bulletin->title.'.'.$bulletin->extension }}" alt="{{$bulletin->title}}">
                     </figure>
+                    <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
+                
                 @elseif($bulletin->file_ext == 'audio')
-                <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
-                <audio controls>
+               <audio controls>
                     <source src="{{ asset('storage/' . $bulletin->user->name . '_' . $bulletin->user->id) .'/'.$bulletin->file_ext.'/'.$bulletin->title.'.'.$bulletin->extension }}" type="audio/{{$bulletin->extension}}">
                      Your browser does not support the audio tag.
                 </audio>
-                    
-                @elseif($bulletin->file_ext == 'video')
                 <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
+                
+                    
+            
+                @elseif($bulletin->file_ext == 'video')
                 <video controls>
                             <source src="{{ asset('storage/' . $bulletin->user->name . '_' . $bulletin->user->id) .'/'.$bulletin->file_ext.'/'.$bulletin->title.'.'.$bulletin->extension }}" type="video/{{$bulletin->extension}}">
                             Your browser does not support the video tag.
-                    </video>
+                </video>
+                <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
+                
                 @elseif($bulletin->file_ext == 'document')
                 <span>File Type:- <i style="text-transform:capitalize;">{{$bulletin->file_ext}}</i></span>
                 <figure class="image is-4by3">
                         <img class="img-responsive" width="40px" src="{{ asset('images/document.png') }}" alt="Audio image" id="audio_image">
-                    </figure>
+                </figure>
                     <a class="button is-primary" href="{{ asset('storage/' . $bulletin->user->name . '_' . $bulletin->user->id) .'/'.$bulletin->file_ext.'/'.$bulletin->title.'.'.$bulletin->extension }}" target="_blank">
                         <i class="fa fa-download" aria-hidden="true"></i>
                         &nbsp;Download

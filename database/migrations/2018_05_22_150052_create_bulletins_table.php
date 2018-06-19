@@ -17,9 +17,11 @@ class CreateBulletinsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            $table->string('subject');
+            $table->longText('subject');
+            $table->string('slug');
             $table->string('file')->nullable();
             $table->string('file_ext')->nullable();
+            $table->string('extension')->nullable();
             $table->timestamps();
         });
     }

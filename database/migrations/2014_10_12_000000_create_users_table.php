@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('status')->default('user');
             $table->string('password');
+            $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

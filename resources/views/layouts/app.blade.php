@@ -102,7 +102,7 @@
                 </span>
               </a>
               <div class="dropdown-menu" role="menu">
-                @if( Auth::user()->status == 'admin')
+                @if( Auth::user()->status == 'admin' || Auth::user()->status == 'superadmin')
                 <a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a>
                 <a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a>
                @endif

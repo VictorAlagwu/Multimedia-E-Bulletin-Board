@@ -20,6 +20,8 @@ class CreatePostsTable extends Migration
             $table->string('message');
             $table->string('file')->nullable();
             $table->string('file_ext')->nullable();
+            $table->string('filename')->nullable();
+            $table->string('extension')->nullable();
             $table->timestamps();
         });
     }

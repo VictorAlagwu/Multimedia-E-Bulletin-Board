@@ -4,20 +4,21 @@
             <small>said {{$post->created_at->diffForHumans()}}</small>
         </h3>
     </div>
-    <div class="panel-body"> {!!$post->message!!} {{$post->filename}}</div>
+    <div class="panel-body"> {!!$post->message!!}</div>
     <div class="panel-footer" style="background-color:#80808052;">
         @if ($post->file_ext == 'image')
         <span>File Type:- <i style="text-transform:capitalize;">{{$post->file_ext}}</i></span>
         <figure>
-            <img width="500" class="img-responsive" src="{{ asset('storage/' . Auth::user()->name . '_' . Auth::id()) .'/'.$post->file_ext.'/'.$post->filename }}" alt="{{$post->title}}">
+            <img width="500" class="img-responsive" src="{{ asset('storage/' . $post->user->name . '_' . $post->user->id) .'/'.$post->file_ext.'/'.$post->filename }}" alt="{{$post->title}}">
         </figure>
     @elseif($post->file_ext == 'audio')
-    <span>File Type:- <i style="text-transform:capitalize;">{{$post->file_ext}}</i></span>
     <audio controls>
         <source src="{{asset('storage/' . $post->user->name . '_' . $post->user->id) .'/'.$post->file_ext.'/'.$post->filename}}" type="audio/{{$post->extension}}">
      
     Your browser does not support the audio tag.
         </audio>
+    <span>File Type:- <i style="text-transform:capitalize;">{{$post->file_ext}}</i></span>
+    
     @elseif($post->file_ext == 'video')
     <span>File Type:- <i style="text-transform:capitalize;">{{$post->file_ext}}</i></span>
     <video controls>
