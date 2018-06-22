@@ -106,7 +106,7 @@
                 <a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a>
                 <a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a>
                @endif
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a>
+                {{-- <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a> --}}
                 <a class="dropdown-item" href="{{route('profile')}}" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> View Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" role="menuitem" href="{{ route('logout') }}"
@@ -130,6 +130,8 @@
     </nav>    
        @yield('content')
     <!-- Footer -->
+    {{-- <example></example> --}}
+    {{-- <flash message="{{ session('flash') }}"></flash> --}}
     <footer class="site-footer">
         <div class="site-footer-legal">© 2018 Victor Alagwu 💻</div>
         <div class="site-footer-right">

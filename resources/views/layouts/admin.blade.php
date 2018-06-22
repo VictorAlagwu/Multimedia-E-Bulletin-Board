@@ -110,7 +110,7 @@
                     {{ Auth::user()->name }}
                     <span class="avatar avatar-online">
                         @if(is_null(Auth::user()->photo))
-                        <img src="{{asset('images/profile/avatar.png')}}" alt="...">
+                        <img src="{{asset('images/profile/nopic.png')}}" alt="...">
                         @else
                         <img src="{{asset('images/profile/'.Auth::user()->photo)}}" alt="...">
                         @endif
@@ -121,7 +121,7 @@
                     @if( Auth::user()->status == 'admin' || Auth::user()->status == 'superadmin')
                     <a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a>
                    @endif
-                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a>
+                    {{-- <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a> --}}
                     <a class="dropdown-item" href="{{route('profile')}}" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> View Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" role="menuitem" href="{{ route('logout') }}"
@@ -160,6 +160,8 @@
     </nav>    
       @yield('content')
     <!-- Footer -->
+    {{-- <example></example> --}}
+    {{-- <flash message="{{ session('flash') }}"></flash> --}}
     <footer class="site-footer">
         <div class="site-footer-legal">© 2018 Victor Alagwu</div>
         <div class="site-footer-right">

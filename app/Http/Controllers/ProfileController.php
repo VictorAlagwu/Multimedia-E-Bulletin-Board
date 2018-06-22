@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
      	$this->validate($request,
          [
-             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:5048'
           
          ]);
          $profile = User::find(Auth::id());
@@ -47,14 +47,9 @@ class ProfileController extends Controller
 
         if($request->hasFile('photo'))
         {
-            if($profile->photo != 'nopic.png'){
+            
             
             $path = 'images/profile/'.$profile->photo;
-            // if(file_exists($path))
-            // {
-            //     unlink($path);
-            // }
-            }
             
             $profile['photo'] = uniqid().'.'.$request->photo->getClientOriginalExtension();
             $request->photo->move('images/profile',$profile['photo']);

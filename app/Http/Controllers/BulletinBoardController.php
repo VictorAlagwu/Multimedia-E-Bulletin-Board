@@ -87,7 +87,7 @@ class BulletinBoardController extends Controller
             $bulletin['title'] = $request->title;
             $bulletin['slug'] = str_slug($request->title, '-');
             $bulletin['user_id'] = auth()->id();
-            Bulletin::create($bulletin);
+            $bulletin = Bulletin::create($bulletin);
             
         }
         

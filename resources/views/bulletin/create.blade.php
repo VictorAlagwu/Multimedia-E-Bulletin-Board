@@ -20,7 +20,13 @@
             
                     <form method="POST" action="/bulletins" enctype="multipart/form-data">
                     {{ csrf_field()}}
-                    
+                    @if(count($errors))
+                    <ul class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
                     <div class="form-group">
                         <h3>Bulletin Board Title</h3>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Enter Bulletin Board Title..."  />
@@ -38,13 +44,7 @@
                         <textarea class="form-control summernote" name="subject" id="subject" rows="20" placeholder="Enter Bulletin Board Subject..."></textarea>
                     </div>
                         <button class="btn btn-default text-center" type="submit" name="submit">Create New Bulletin Board</button>
-                        @if(count($errors))
-                            <ul class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
+                   
                     </form>
                 @else
                     <p>Please <a href="/login">Sign-In</a> to create a new bulletin board</p>

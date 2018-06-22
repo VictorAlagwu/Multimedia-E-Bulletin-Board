@@ -61,6 +61,7 @@
             @endforeach 
                 {{$posts->links('vendor.pagination.bootstrap-4')}}
             <hr>
+            
            <form method="POST" action="{{route('post', ['id' => $bulletin->id])}}" enctype="multipart/form-data">
             {{csrf_field()}}
                 <div class="form-group">

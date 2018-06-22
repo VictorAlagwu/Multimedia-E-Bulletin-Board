@@ -76,7 +76,8 @@
                                     <li><a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a></li>
                                     <li><a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a></li>
                                     @endif
-                                    <li><a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> View Subscribed BB</a></li>
+                                    <li><a class="dropdown-item" href="{{route('profile')}}" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> View Profile</a></li>
+                                    <div class="dropdown-divider"></div>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -97,6 +98,8 @@
         </nav>
 
         @yield('content')
+        {{-- <example></example> --}}
+        {{-- <flash message="{{ session('flash') }}"></flash> --}}
     </div>
 
     <!-- Scripts -->

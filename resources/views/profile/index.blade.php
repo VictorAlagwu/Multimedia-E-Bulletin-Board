@@ -19,14 +19,19 @@
                         </div>
                         <form role="form" method="POST" action="{{route('profile.update')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('photo') ? ' has-photo' : '' }}">
                             <h4>Profile Photo</h4>
                             @if(is_null($user->photo))
                             <img src="{{asset('images/profile/nopic.png')}}" class="img-thumbnail"><br/>
-                            @else
+                            @else 
                                 <img src="{{asset('images/profile')}}/{{$user->photo}}" class="img-thumbnail"><br/>
                             @endif
                             <input type="file" name="photo" class="form-control">
+                            @if ($errors->has('photo'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('photo') }}</strong>
+                            </span>
+                            @endif
                         </div>
                         <div class="form-group mx-auto">
                             <button type="submit" class="btn btn-info text-center">Update</button>
@@ -90,7 +95,7 @@
                                             <tr>
                                             <td>{{$userbulletin->bulletin->id}}</td>
                                             <td>{{$userbulletin->bulletin->user->name}}</td>
-                                            <td><a style="text-decoration:none; color:grey;" href="{{route('bulletin', ['id' => $bulletin->id, 'slug' => $bulletin->slug])}}">{{$userbulletin->bulletin->title}}</a> </td>
+                                            <td><a style="text-decoration:none; color:grey;" href="{{route('bulletin', ['id' => $userbulletin->bulletin->id, 'slug' => $userbulletin->bulletin->slug])}}">{{$userbulletin->bulletin->title}}</a> </td>
                                             <td>{{$userbulletin->bulletin->created_at->diffForHumans()}}</td>
                                            
                                             </tr>
