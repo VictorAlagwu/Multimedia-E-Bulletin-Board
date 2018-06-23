@@ -54,6 +54,14 @@
     <script>
       Breakpoints();
     </script>
+    <style>
+      nav.site-navbar.navbar.navbar-default.navbar-fixed-top.navbar-mega{
+        background-color: #5a20c5d6;
+     }
+     .navbar-default .navbar-toolbar .nav-link {
+         color:floralwhite;
+    }
+    </style>
   </head>
   <body class="animsition site-navbar-small dashboard">
     <!--[if lt IE 8]>

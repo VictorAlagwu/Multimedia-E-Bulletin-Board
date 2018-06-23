@@ -28,6 +28,12 @@
     body{padding-bottom: 100px;}
      .level {display:flex; align-items:center;}
      .flex{flex:1;}
+     .navar-default{
+        background-color: #5a20c5d6;
+     }
+     .navbar-default .navbar-toolbar .nav-link {
+         color:floralwhite;
+    }
    </style>
 </head>
 <body>
