@@ -110,7 +110,7 @@
                 </span>
               </a>
               <div class="dropdown-menu" role="menu">
-                @if( Auth::user()->status == 'admin' || Auth::user()->status == 'superadmin')
+                @if( Auth::user()->status == 'admin')
                 <a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a>
                 <a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a>
                @endif
@@ -138,8 +138,7 @@
     </nav>    
        @yield('content')
     <!-- Footer -->
-    {{-- <example></example> --}}
-    {{-- <flash message="{{ session('flash') }}"></flash> --}}
+
     <footer class="site-footer">
         <div class="site-footer-legal">© 2018 Victor Alagwu 💻</div>
         <div class="site-footer-right">

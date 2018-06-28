@@ -67,9 +67,11 @@
                   
                 </tbody>
               </table>
-                ({{$bulletins->links('vendor.pagination.bootstrap-4')}})
+                  @if($bulletins->count() > 4)
+                    ({{$bulletins->links('vendor.pagination.bootstrap-4')}})
+                  @endif
               @else
-              <h4 class="text-center" style="padding-top:40px;">Sorry, No bulletin board added</h4>
+                <h4 class="text-center" style="padding-top:40px;">Sorry, No bulletin board added</h4>
               @endif
             </div>
            

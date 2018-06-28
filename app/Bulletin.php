@@ -28,4 +28,9 @@ class Bulletin extends Model
     public function getPostCount(){
         return $this->posts()->count();
     }
+
+    public function userbulletins()
+    {
+        return $this->hasMany(Userbulletin::class);
+    }
 }

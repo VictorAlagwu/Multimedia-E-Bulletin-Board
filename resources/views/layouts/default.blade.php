@@ -13,13 +13,10 @@
 
     <!-- Styles -->
      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     <link rel="stylesheet" href="{{asset('global/css/bootstrap-extend.min.css')}}">
      <link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
      <link rel="stylesheet" href="{{asset('global/vendor/waves/waves.css')}}">
 
       <!-- Fonts -->
-    <link rel="stylesheet" href="{{asset('global/fonts/material-design/material-design.min.css')}}">
-    <link rel="stylesheet" href="{{asset('global/fonts/brand-icons/brand-icons.min.css')}}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
     
    
@@ -37,7 +34,7 @@
    </style>
 </head>
 <body>
-    <div id="app">
+    <div>
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -78,7 +75,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    @if( Auth::user()->status == 'admin' || Auth::user()->status == 'superadmin')
+                                    @if( Auth::user()->status == 'admin')
                                     <li><a class="dropdown-item" href="{{url('admin')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Enter Dashboard</a></li>
                                     <li><a class="dropdown-item" href="{{url('bulletins/create')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Create New BB</a></li>
                                     @endif
@@ -104,14 +101,18 @@
         </nav>
 
         @yield('content')
-        {{-- <example></example> --}}
-        {{-- <flash message="{{ session('flash') }}"></flash> --}}
+
     </div>
+      <!-- Footer -->
+
+    <footer class="footer">
+        <div class="text-center">© 2018 Crafted with ❤ by Victor</div>
+    </footer>
 
     <!-- Scripts -->
-    <!-- <script src="{{ asset('js/jquery.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/popper.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> -->
+    {{-- <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/popper.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('summernote/summernote.js') }}"></script>  
       

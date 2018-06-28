@@ -105,13 +105,13 @@ class BulletinBoardController extends Controller
     public function show($id, $slug)
     {
         if(auth()->check()){
-            $bulletin = Bulletin::where(['id' => $id,'slug' => $slug])->first();
-
+            $bulletin = Bulletin::where(['id' => $id,'slug' => $slug])->firstOrFail();
+            
             $user = Userbulletin::where('user_id', auth()->id())
                                 ->where('bulletin_id', $id)
                                 ->where('subscribe', 1)
                                 ->first();
-            if($user || Auth::user()->status == 'admin' || Auth::user()->status == 'superadmin'){
+            if($user || Auth::user()->status == 'admin'){
                 return view('bulletin.show', ['bulletin' => $bulletin, 'posts' => $bulletin->posts()->paginate(5)]);      
             }else{
                 return redirect('/bulletins');
@@ -131,9 +131,15 @@ class BulletinBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $slug)
     {
         //
+        $bulletin = Bulletin::where(['id' => $id,'slug' => $slug])->firstOrFail();
+        if(Auth::user()->id == $bulletin->user_id || Auth::user()->status == 'admin'){
+            return view('bulletin.edit', ['bulletin' => $bulletin]);      
+        }else{
+            return redirect('/bulletins');
+        }
     }
 
     /**
@@ -143,22 +149,17 @@ class BulletinBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $slug)
     {
         //
-    }
+        $bulletin['title'] = $request->title;
+        $bulletin['subject'] = $request->subject;
+        $bulletin['slug'] = str_slug($request->title, '-');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+        $bulletin = Bulletin::where(['id' => $id,'slug' => $slug])->update($bulletin);
 
+        return redirect("bulletins");
+    }
 
      /**
      * Get type by extension

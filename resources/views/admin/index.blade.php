@@ -72,14 +72,19 @@
                         <td><a href="{{route('admin/bulletin', ['id' => $bulletin->id])}}">{{$bulletin->title}}</a></td>
                         <td>Jan 1, 2017</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
-                                data-toggle="tooltip" data-original-title="Edit">
+                            <a class="btn btn-sm btn-icon btn-pure btn-default"
+                                data-toggle="tooltip" data-original-title="Edit" href="{{route('bulletin/edit', ['id'=>$bulletin->id,'slug'=>$bulletin->slug])}}">
                                 <i class="icon md-wrench" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
-                                data-toggle="tooltip" data-original-title="Delete">
-                                <i class="icon md-close" aria-hidden="true"></i>
-                            </button>
+                        </a>
+                            <form method="POST" action="{{route('admin/bulletin', $bulletin->id)}}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('delete') }}
+                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default"
+                                        data-toggle="tooltip" data-original-title="Delete">
+                                        <i class="icon md-close" aria-hidden="true"></i>
+                                    </button>
+                              </form>
+                            
                         </td>
                         </tr>
                         @endforeach
