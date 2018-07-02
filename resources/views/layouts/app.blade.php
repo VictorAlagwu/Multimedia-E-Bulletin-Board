@@ -92,6 +92,8 @@
           <!-- Navbar Toolbar Right -->
           
           <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+
+              <li><a class="nav-link" href="{{url('/enquiryform')}}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i>Contact Admin</a></li>
         @guest
               <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>

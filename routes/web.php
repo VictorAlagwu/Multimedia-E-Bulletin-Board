@@ -46,3 +46,8 @@ Route::delete('bulletins/post/{id}','PostController@destroy')->name('post');
 // User Profiles Routes
 Route::get('/profile', 'ProfileController@edit')->name('profile');
 Route::post('/profile-update', 'ProfileController@update')->name('profile.update');
+
+
+	
+Route::get('/sendemail', 'SendEmail@fn_sendmail');
+Route::get('/enquiryform', 'SendEmail@index');
